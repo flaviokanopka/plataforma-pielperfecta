@@ -1,0 +1,299 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Locagora Brand Colors */
+    --brand-navy: 195 100% 11%;     /* #002736 */
+    --brand-gold: 38 33% 43%;       /* #91734E */
+    --brand-pink: 350 43% 95%;      /* #FBE5E9 */
+    
+    /* Light Mode Design System */
+    --background: 0 0% 100%;
+    --foreground: 195 100% 11%;     /* Navy text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 195 100% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 100% 11%;
+
+    --primary: 195 100% 11%;        /* Navy primary */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 350 43% 95%;       /* Pink secondary */
+    --secondary-foreground: 195 100% 11%;
+
+    --muted: 350 43% 95%;
+    --muted-foreground: 195 50% 30%;
+
+    --accent: 38 33% 43%;           /* Gold accent */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 350 30% 90%;
+    --input: 350 30% 96%;
+    --ring: 195 100% 11%;
+
+    --radius: 0.75rem;
+
+    /* Chat Design System */
+    --chat-gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(195 90% 18%));
+    --chat-gradient-secondary: linear-gradient(135deg, hsl(var(--accent)), hsl(38 40% 50%));
+    --chat-bubble-user: 195 100% 11%;
+    --chat-bubble-user-foreground: 0 0% 100%;
+    --chat-bubble-assistant: 0 0% 98%;
+    --chat-bubble-assistant-foreground: 195 100% 11%;
+    --chat-shadow-elegant: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    --chat-shadow-hover: 0 8px 30px -8px hsl(var(--primary) / 0.15);
+    
+    /* Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Sidebar Light Mode */
+    --sidebar-background: 0 0% 99%;
+    --sidebar-foreground: 195 100% 11%;
+    --sidebar-primary: 195 100% 11%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 350 43% 95%;
+    --sidebar-accent-foreground: 195 100% 11%;
+    --sidebar-border: 350 30% 90%;
+    --sidebar-ring: 195 100% 11%;
+  }
+
+  .dark {
+    /* Dark Mode Design System - Modern Gray/Black Theme */
+    --background: 0 0% 4%;          /* Deep black background */
+    --foreground: 0 0% 95%;         /* Near white text */
+
+    --card: 0 0% 6%;               /* Slightly lighter black for cards */
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 90%;           /* Light gray primary */
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 12%;         /* Dark gray secondary */
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 12%;             /* Dark gray muted */
+    --muted-foreground: 0 0% 65%; /* Medium gray text */
+
+    --accent: 0 0% 20%;            /* Medium gray accent */
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 18%;            /* Subtle gray borders */
+    --input: 0 0% 12%;              /* Dark gray inputs */
+    --ring: 0 0% 90%;              /* Light gray focus ring */
+
+    /* Chat Dark Mode - Modern Gray Theme */
+    --chat-gradient-primary: linear-gradient(135deg, hsl(0 0% 20%), hsl(0 0% 15%));
+    --chat-gradient-secondary: linear-gradient(135deg, hsl(0 0% 25%), hsl(0 0% 18%));
+    --chat-bubble-user: 0 0% 20%;  /* Dark gray user bubbles */
+    --chat-bubble-user-foreground: 0 0% 95%;
+    --chat-bubble-assistant: 0 0% 8%; /* Very dark assistant bubbles */
+    --chat-bubble-assistant-foreground: 0 0% 90%;
+    --chat-shadow-elegant: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --chat-shadow-hover: 0 8px 30px -8px hsl(0 0% 0% / 0.3);
+
+    /* Sidebar Dark Mode - Modern Gray Theme */
+    --sidebar-background: 0 0% 2%; /* Very dark sidebar */
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 0 0% 90%;   /* Light gray primary */
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;    /* Dark gray accent */
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 15%;    /* Subtle gray borders */
+    --sidebar-ring: 0 0% 90%;      /* Light gray focus ring */
+  }
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.2);
+  border-radius: 3px;
+}
+
+.group:hover .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* Chat Component Styles */
+.chat-bubble-enter {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.chat-session-hover {
+  transition: var(--transition-smooth);
+}
+
+.chat-session-hover:hover {
+  background: linear-gradient(135deg, hsl(var(--muted) / 0.6), hsl(var(--muted) / 0.8));
+  box-shadow: var(--chat-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.chat-gradient-bg {
+  background: var(--chat-gradient-primary);
+}
+
+.chat-message-user {
+  background: hsl(var(--chat-bubble-user));
+  color: hsl(var(--chat-bubble-user-foreground));
+  box-shadow: var(--chat-shadow-elegant);
+}
+
+.chat-message-assistant {
+  background: hsl(var(--chat-bubble-assistant));
+  color: hsl(var(--chat-bubble-assistant-foreground));
+  box-shadow: var(--chat-shadow-elegant);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.4s ease-out;
+}
+
+/* Modern Dark Mode Enhancements */
+.dark {
+  /* Enhanced scrollbar for dark mode */
+  --scrollbar-thumb: 0 0% 25%;
+  --scrollbar-thumb-hover: 0 0% 35%;
+  --scrollbar-track: 0 0% 8%;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--scrollbar-thumb));
+}
+
+.dark .group:hover .scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--scrollbar-thumb-hover));
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-track {
+  background: hsl(var(--scrollbar-track));
+}
+
+/* Modern glass effect for cards in dark mode */
+.dark .glass-card {
+  background: hsl(0 0% 6% / 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(0 0% 18% / 0.5);
+}
+
+/* Enhanced hover effects for dark mode */
+.dark .hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -8px hsl(0 0% 0% / 0.4);
+}
+
+/* Modern button styles for dark mode */
+.dark .btn-modern {
+  background: linear-gradient(135deg, hsl(0 0% 20%), hsl(0 0% 15%));
+  border: 1px solid hsl(0 0% 25%);
+  transition: all 0.3s ease;
+}
+
+.dark .btn-modern:hover {
+  background: linear-gradient(135deg, hsl(0 0% 25%), hsl(0 0% 20%));
+  border-color: hsl(0 0% 30%);
+  box-shadow: 0 4px 15px -4px hsl(0 0% 0% / 0.3);
+}
+
+/* Efeito de borda gradiente para cards */
+.dark .gradient-border {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.dark .gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, hsl(var(--border) / 0.5), hsl(var(--border) / 0.2));
+}
+
+/* Animação de fade-in para elementos */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced focus states for dark mode */
+.dark *:focus-visible {
+  outline: 2px solid hsl(0 0% 90%);
+  outline-offset: 2px;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
